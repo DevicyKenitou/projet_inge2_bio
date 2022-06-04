@@ -43,5 +43,6 @@ class Moteur:
         # ici on met le code de Juliette pour tourner tel ou tel moteur
 
         print("Le moteur", self.name, "a tourné de", rotation)
+        self.currentRotation = rotation
 
         return None

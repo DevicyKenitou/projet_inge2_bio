@@ -50,6 +50,7 @@ function TreatJSON(json){
     if(json.obj == 'coord'){
         const coord = json.coord;
         Q('#moteur1 img').style.transform = `rotate(${coord.x*2}deg)`
+        Q('#moteur2 img').style.transform = `rotate(${coord.y*2}deg)`
 
     }
 }

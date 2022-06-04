@@ -1,5 +1,8 @@
 import json
 import urllib
+import urllib.parse
+
+import urllib.request
 
 from vocal import Vocal_Init
 from controleur import Controleur_Init, SetNewPosition
@@ -42,6 +45,9 @@ def Log(arg, isJson=False):
         arg = json.dumps(arg, ensure_ascii=False)
 
     print(arg)
+
+    arg = urllib.parse.quote(arg.encode('utf-8'))
+
     try:
         arg = urllib.parse.quote(arg.encode('utf-8'))
     except AttributeError:

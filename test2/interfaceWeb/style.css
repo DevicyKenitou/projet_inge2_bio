@@ -1,0 +1,15 @@
+.moteur img{
+    display: block;
+    margin:auto;
+    transform: rotate(0deg);
+    transition: all 1s ease;
+}
+
+
+#moteur_container{
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+}

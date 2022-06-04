@@ -48,6 +48,12 @@ process.stdout.on('data', (data)=>{
 function FromPython(url){
     let data = url.replace(/^\/vocal\//, '')
     data = decodeURIComponent(data)
+    data = decodeURIComponent(data)
+
+    if(data == ">start")
+        wsData.vocalStatusOn = true
+    else if(data == ">end")
+        wsData.vocalStatusOn = false
 
     console.log("Données reçu depuis Python (vocal):", data)
 
