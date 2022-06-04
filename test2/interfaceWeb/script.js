@@ -27,10 +27,12 @@ socket.addEventListener('message', function (event) {
     console.log(event.data);
     const data = event.data
 
-    if(data == ">start")
+    if(data == ">start"){
         statut.vocal.text.innerHTML = 'ON';
-    else if(data == ">end")
+    }
+    else if(data == ">end"){
         statut.vocal.text.innerHTML = 'OFF';
+    }
     else
         try{
             TreatJSON(JSON.parse(data))
@@ -44,9 +46,11 @@ const contactServer = (str) => {
 };
 
 function TreatJSON(json){
+
     if(json.obj == 'coord'){
         const coord = json.coord;
         Q('#moteur1 img').style.transform = `rotate(${coord.x*2}deg)`
+
     }
 }
 

@@ -62,12 +62,17 @@ const wss = new WebSocketServer({ port: 8081 });
 let wsData = {
     vocalStatusOn : false
 }
-wss.on('connection', function connection(ws) {
 
+wss.on('connection', function connection(ws) {
     console.log("New client connected")
+
+    // on envoit le statut du vocal à chaque nouvelle ùconnexion
+    SendTOAllClient(wsData.vocalStatusOn ? '>start' : '>end')
+
     ws.on('message', function message(data, isBinary) {
         //WSServer.ReceiveFromClient(ws, data.toString());
         console.log("WS => ", data.toString())
+
     });
 });
 
