@@ -29,7 +29,7 @@ def callback(indata, frames, time, status):
         print(status, file=sys.stderr)
     q.put(bytes(indata))
 
-async def Vocal_Init(OnResult=None):
+def Vocal_Init(OnResult=None):
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument(
         '-l', '--list-devices', action='store_true',

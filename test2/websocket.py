@@ -48,7 +48,7 @@ def WS_SendMessage(msg):
     triggered = True
 
 def StartWS(wsIpAdress='localhost'):
-    asyncio.run(main(wsIpAdress))
+    #asyncio.run(main(wsIpAdress))
     print("OKOK")
 
 
