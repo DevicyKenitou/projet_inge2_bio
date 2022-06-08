@@ -6,10 +6,11 @@ const WebSocket = require('ws');
 const {WebSocketServer} = require('ws');
 
 // https://quizdeveloper.com/faq/how-can-i-get-local-ip-address-in-nodedotjs-server-aid1245
-const clientIp = Object.values(require("os").networkInterfaces())
+let clientIp = Object.values(require("os").networkInterfaces())
                         .flat()
                         .filter((item) => !item.internal && item.family === "IPv4")
-                        .find(Boolean).address;
+                        .find(Boolean);
+    clientIp = clientIp && clientIp.address ? clientIp.address : 'localhost'
 
 const GetFile = (path) => {
     try{
@@ -36,18 +37,10 @@ const server = http.createServer((req, res)=>{
     res.end(dataToReturn)
 })
 
-server.listen(8080, '', '', console.log('Server Web Ready at http://' + clientIp + ':' + PORT))
-
-/*
-const process = spawn("python3", ['-u', './main.py', clientIp]);
-process.stdout.on('data', (data)=>{
-    const txt = data.toString().replace(/([\n])$/, '')
-    console.log("\x1b[35m" + txt + "\x1b[0m")
-})*/
+server.listen(8080, '', '', console.log("\x1b[32m" + 'Serveur Web disponible en cliquant ici http://' + clientIp + ':' + PORT + " \x1b[0m"))
 
 function FromPython(url){
     let data = url.replace(/^\/vocal\//, '')
-    data = decodeURIComponent(data)
     data = decodeURIComponent(data)
 
     if(data == ">start")
@@ -70,7 +63,7 @@ let wsData = {
 }
 
 wss.on('connection', function connection(ws) {
-    console.log("New client connected")
+    console.log("\x1b[32m >Nouveau client connecté \x1b[0m")
 
     // on envoit le statut du vocal à chaque nouvelle ùconnexion
     SendTOAllClient(wsData.vocalStatusOn ? '>start' : '>end')

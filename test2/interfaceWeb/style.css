@@ -1,15 +1,143 @@
-.moteur img{
+:root {
+    --green: #2eff76;
+    --red: #ff2e2e;
+}
+
+body {
+    background: #282828;
+    font-family: Arial;
+}
+
+.moteur img {
     display: block;
-    margin:auto;
+    margin: auto;
+    transform: rotate(-45deg);
+    transition: all 1s ease;
+}
+
+.moteur {
     transform: rotate(0deg);
     transition: all 1s ease;
 }
 
-
-#moteur_container{
-    display: inline-flex;
+#moteur_container {
+    display: flex;
     vertical-align: middle;
     align-items: center;
     justify-content: center;
-    margin: 0 15px;
+}
+
+.cadre {
+    box-shadow: 0 0 2px #959595;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px;
+    background: #fff;
+    transform: scale(1);
+    transition: all 300ms ease;
+    min-width: 200px;
+    max-width: 30%;
+}
+
+.cadre:hover {
+    box-shadow: 0 0 5px #bbbbbb;
+    transform: scale(1.15);
+    border-radius: 10px;
+}
+
+.description {
+    margin-top: 32px;
+}
+
+.description table {
+    width: 100%;
+}
+
+td[colspan="3"] {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+#statut_panel {
+    background: #1a1a1a;
+    color: #f4f4f4;
+    box-shadow: 0 0 2px #000;
+    border-radius: 5px;
+    width: 200px;
+    margin: auto;
+    font-size: 13px;
+    text-align: center;
+    padding: 4px;
+    margin-bottom: 30px;
+    position: relative;
+    font-weight: bold;
+}
+#statut_panel p {
+    margin: 4px;
+}
+
+#statut_panel .title {
+    margin-bottom: 8px;
+    border-bottom: 1px solid #515151;
+    padding-bottom: 7px;
+}
+
+.indicator {
+    background: #d5d5d5;
+    box-sizing: border-box;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    right: 18px;
+    border-radius: 50%;
+    margin-top: 2px;
+    transition: all 500ms ease;
+}
+
+.on .indicator {
+    background: var(--green);
+}
+
+.off .indicator {
+    background: var(--red);
+}
+
+#terminal {
+    font-family: monospace;
+    font-size: 11px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+#terminal .line {
+    background: #d5f5ff;
+    margin: 1px 0px;
+    padding: 3px 4px;
+}
+#terminal .line:nth-child(2n) {
+    background: white;
+}
+#terminal .horodatage {
+    color: #5973ff;
+    padding-right: 6px;
+}
+
+#terminal .default{
+    color : #000;
+}
+
+#terminal .gris{
+    color: #7d7d7d;
+}
+
+#terminal .success{
+    color: #1dc828;
+}
+
+#terminal .fail{
+    color: #ec0101;
+}
+
+#terminal .info{
+    color: #1d58c8;
 }

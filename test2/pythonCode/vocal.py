@@ -14,6 +14,9 @@ import sounddevice as sd
 import vosk
 import sys
 
+from pythonCode.color import printColors
+
+isListening = True
 q = queue.Queue()
 
 def int_or_str(text):
@@ -27,9 +30,16 @@ def callback(indata, frames, time, status):
     """This is called (from a separate thread) for each audio block."""
     if status:
         print(status, file=sys.stderr)
-    q.put(bytes(indata))
 
-def Vocal_Init(OnResult=None):
+    if isListening is True: # on pousse les données audio dans Vosk si on veut écouter
+        q.put(bytes(indata))
+
+# fonction pour lancer la commande vocale Vosk
+def Vocal_Launch(OnPredict=None):
+
+    # initialisation des paramètres Vosk, tel que la sélection du périphérique d'entrée (microphone)
+    # chargement du modèle Vosk (jeu de données) pour la reconnaissance vocale
+
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument(
         '-l', '--list-devices', action='store_true',
@@ -74,6 +84,9 @@ def Vocal_Init(OnResult=None):
         else:
             dump_fn = None
 
+
+        # début de la récupération des données audio du micro et traitement(conversion en mot)
+
         with sd.RawInputStream(samplerate=args.samplerate, blocksize = 8000, device=args.device, dtype='int16',
                                 channels=1, callback=callback):
                 print('#' * 80)
@@ -83,19 +96,19 @@ def Vocal_Init(OnResult=None):
                 rec = vosk.KaldiRecognizer(model, args.samplerate)
                 while True:
                     data = q.get()
-
                     textVal = {}
                     isPredicted = False
 
-                    if rec.AcceptWaveform(data):
+                    if rec.AcceptWaveform(data):    # cas où l'algo Vosk nous fourni un résultat final de sa prédiction
                         textVal = rec.Result()
                         isPredicted = False
-                    else:
+                    else:                           # cas où l'algo Vosk nous fourni une prédiction avant résultat final
                         textVal = rec.PartialResult()
                         isPredicted = True
 
-                    if OnResult is not None:
-                        OnResult(result=textVal, isPredicted=isPredicted)
+                    # une fois un mot obtenu, on appelle notre function personalisée pour gérer les cas et controler les moteurs
+                    if OnPredict is not None:
+                        OnPredict(result=textVal, isPredicted=isPredicted)
                     else:
                         print(textVal)
                         
@@ -107,3 +120,19 @@ def Vocal_Init(OnResult=None):
         parser.exit(0)
     except Exception as e:
         parser.exit(type(e).__name__ + ': ' + str(e))
+
+
+# permet de changer le flag indiquant s'il faut injecter les données audio du micro pour analyse
+def Vocal_IsListening(val):
+
+    if val is True:
+        print(printColors.OKGREEN, "Enregistrement du micro en cours",printColors.END)
+    else:
+        print(printColors.FAIL, "Le microphone n'est plus sur écoute",printColors.END)
+
+    isListening = val
+
+
+# getter de la variable isListening
+def Vocal_GetListeningStatus():
+    return isListening

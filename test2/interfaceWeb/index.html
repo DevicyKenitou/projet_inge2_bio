@@ -9,18 +9,68 @@
 </head>
 <body>
     
-    <div>
-        <p id="ws_statut">Websocket statut : <span>OFF</span></p>
-        <p id="vocal_statut">Vocal statut : <span>OFF</span></p>
+    <div id="statut_panel">
+        <p class="title">STATUT</p>
+        <p id="ws_statut">Websocket<span class="indicator off"></span></p>
+        <p id="vocal_statut">Vocal<span class="indicator off"></span></p>
     </div>
 
     <div id="moteur_container">
-        <div id="moteur1" class="moteur">
-            <img src="./img/moteur1.jpg" alt="" width="200">
+        <div class="cadre">
+            <div id="moteur1" class="moteur">
+                <img src="./img/boussole.png" alt="" width="200">
+            </div>
+            <div class="description">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Vue de haut</td>
+                        </tr>
+                        <tr>
+                            <td>Moteur</td>
+                            <td>:</td>
+                            <td>1 (base)</td>
+                        </tr>
+                        <tr>
+                            <td>Rotation</td>
+                            <td>:</td>
+                            <td><span class="rotation_val">0</span>°</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div id="moteur2" class="moteur">
-            <img src="./img/moteur2.png" alt="" width="200">
+        <div class="cadre">
+            <div id="moteur2" class="moteur">
+                <img src="./img/boussole.png" alt="" width="200" style="transform : rotate(-135deg);">
+            </div>
+            <div class="description">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Vue de côté</td>
+                        </tr>
+                        <tr>
+                            <td>Moteur</td>
+                            <td>:</td>
+                            <td>2 (bras)</td>
+                        </tr>
+                        <tr>
+                            <td>Rotation</td>
+                            <td>:</td>
+                            <td><span class="rotation_val">0</span>°</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="cadre">
+            <div id="terminal">
+
+            </div>
+        </div>
+
     </div>
 
     <script src="./script.js"></script>
