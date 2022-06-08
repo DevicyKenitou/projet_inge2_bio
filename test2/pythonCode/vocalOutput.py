@@ -81,7 +81,7 @@ def OnResult(result):
         # on attend 2 secondes avant la prochaine commande
         time.sleep(2)
     else:
-        if result == "ouvrir":
+        if result == "attraper":
             Pince_Test()
             # on attend 1 secondes avant la prochaine commande
             time.sleep(1)

@@ -106,7 +106,7 @@ td[colspan="3"] {
 #terminal {
     font-family: monospace;
     font-size: 11px;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 #terminal .line {

@@ -86,7 +86,7 @@ socket.addEventListener('message', function (event) {
     }
     else if(data == ">end"){
         ClassSwitch(statut.vocal.p, 'off', 'on');
-        terminal.info('Commande vocale éteinte')
+        terminal.fail('Commande vocale éteinte')
     }
     else
         try{
