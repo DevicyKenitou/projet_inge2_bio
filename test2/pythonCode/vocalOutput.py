@@ -13,7 +13,7 @@ from CONST import __Is_Running_On_Raspberry__
 # donc on désactive les fonctions de contrôle des moteurs
 
 if __Is_Running_On_Raspberry__ is True:
-    from pince import Pince_Test
+    from pythonCode.pince import Pince_Test
     print(printColors.HEADER, ">Code lancer sur une Raspberry<", printColors.END)
 else:
     def Pince_Test(): 
