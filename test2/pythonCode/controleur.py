@@ -12,7 +12,7 @@ def SetNewPosition(coordXY):
     # TODO on devra convertir les coord en rotation de moteurs
 
     SetRotation(moteur["1"], coordXY["x"])
-    #SetRotation(moteur["2"], coordXY["y"])
+    SetRotation(moteur["2"], coordXY["y"])
 
 
     return None
@@ -29,6 +29,6 @@ def SetRotation(motorSelected, rotation):
 def Controleur_Init():
     Moteur_Init()
     moteur["1"] = Moteur('Moteur Base', 20, 21)
-    #moteur["2"] = Moteur('Moteur Bras', 20, 21)
+    moteur["2"] = Moteur('Moteur Bras', 16, 12)
 
     return None

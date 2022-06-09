@@ -34,14 +34,11 @@ class Moteur:
         GPIO.setup(_step, GPIO.OUT)
 
     def Tourner(self, rotation):
-
-        # TODO convertir les dégrées en steps
         step = int(self.coefPasRotation * rotation)
 
         print("Le moteur", self.name, "a tourné de", rotation, '° =', step, 'steps')
         self.currentRotation = rotation
-
-        self.ApplyStep(24)
+        self.ApplyStep(step)
 
     def ApplyStep(self, step):
         # sens
@@ -57,6 +54,7 @@ class Moteur:
             sleep(delay)
             GPIO.output(self._step, GPIO.LOW)
             sleep(delay)
+
 
 if __name__ == "__main__":
     print("test")
