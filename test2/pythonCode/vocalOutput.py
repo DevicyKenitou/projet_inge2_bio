@@ -71,11 +71,11 @@ def OnResult(result):
     if result in dicoNb:
         print(dicoNb[result])
         coord = dicoNb[result]['coordXY']
-        SetNewPosition(coord)
+        rotation = SetNewPosition(coord)
         Log({
             "nom" : dicoNb[result]["nom"],
             "obj" : 'coord',
-            "coord" : coord
+            "coord" : rotation
         }, isJson=True)
 
         # on attend 2 secondes avant la prochaine commande

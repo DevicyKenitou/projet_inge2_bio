@@ -8,7 +8,7 @@ moteur = {
     "2" : None
 }
 
-LONGUEUR_BRAS = 10 # en centimètre, car dans tout le code, on résonnera en cm
+LONGUEUR_BRAS = 100 # en centimètre, car dans tout le code, on résonnera en cm
 LIMIT_ROTATION = -2
 
 def RadToDeg(val):
@@ -25,7 +25,10 @@ def ModeleInverse(coordXY, longueurBras):
     val = math.sqrt(w1**2 + w2**2) / a2
     if val > 1 or val < -1:
         print(printColors.WARNING, '>Ces coordonnées ne sont pas atteignable par le robot<', printColors.END)
-        return [LIMIT_ROTATION, LIMIT_ROTATION]
+        return {
+            "moteur1" : LIMIT_ROTATION,
+            "moteur2" : LIMIT_ROTATION
+        }
 
     q2 = math.acos(val)
 
@@ -33,8 +36,8 @@ def ModeleInverse(coordXY, longueurBras):
     q2 = RadToDeg(q2)
 
     return {
-        'moteur1' : q1,
-        'moteur2' : q2
+        "moteur1" : q1,
+        "moteur2" : q2
     }
 
 
@@ -45,11 +48,14 @@ def SetNewPosition(coordXY):
     # on convertit les coord en rotation de moteurs
     result = ModeleInverse(coordXY, LONGUEUR_BRAS)
 
-    SetRotation(moteur["1"], result['moteur1'])
-    SetRotation(moteur["2"], result['moteur2'])
+    SetRotation(moteur["1"], result["moteur1"])
+    SetRotation(moteur["2"], result["moteur2"])
 
 
-    return None
+    return {
+        'x' : result["moteur1"],
+        'y' : result["moteur2"]
+    }
 
 # Applique de la rotation à un moteur
 # motor => objet Moteur

@@ -1,6 +1,10 @@
 from time import sleep
-import RPi.GPIO as GPIO
-#from CONST import __Is_Running_On_Raspberry__
+from CONST import __Is_Running_On_Raspberry__
+
+if __Is_Running_On_Raspberry__ is True:
+    import RPi.GPIO as GPIO
+else:
+    def GPIO(): return None
 
 DIR = 20    # sens de rotation au port GPIO20
 STEP = 21   # GPIO 
@@ -15,7 +19,8 @@ step_total = SPR #1 rotation
 delay = .0208
 
 def Moteur_Init():
-    GPIO.setmode(GPIO.BCM)
+    if __Is_Running_On_Raspberry__ is True:
+        GPIO.setmode(GPIO.BCM)
 
 
 class Moteur:
@@ -29,9 +34,9 @@ class Moteur:
         self._dir = _dir
         self._step = _step
 
-        #if __Is_Running_On_Raspberry__ is True:
-        GPIO.setup(_dir, GPIO.OUT)
-        GPIO.setup(_step, GPIO.OUT)
+        if __Is_Running_On_Raspberry__ is True:
+            GPIO.setup(_dir, GPIO.OUT)
+            GPIO.setup(_step, GPIO.OUT)
 
     def Tourner(self, rotation):
         step = int(self.coefPasRotation * rotation)
@@ -41,6 +46,9 @@ class Moteur:
         self.ApplyStep(step)
 
     def ApplyStep(self, step):
+
+        if __Is_Running_On_Raspberry__ is False:
+            return None
         # sens
         if step < 0:
             GPIO.output(self._dir, CCW)
