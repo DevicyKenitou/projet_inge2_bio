@@ -69,7 +69,7 @@ def SetRotation(motorSelected, rotation):
 
 def Controleur_Init():
     Moteur_Init()
-    moteur["1"] = Moteur('Moteur Base', 20, 21)
+    moteur["1"] = Moteur('Moteur Base', 26, 19)
     moteur["2"] = Moteur('Moteur Bras', 16, 12)
 
     return None

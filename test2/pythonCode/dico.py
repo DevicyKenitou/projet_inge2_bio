@@ -17,10 +17,14 @@ dicoNb = {
     },
     "quatre" : {
         "nom" : "emplacement 4",
-        "coordXY" : {'x' : 40, 'y' : 130}
+        "coordXY" : {'x' : -40, 'y' : -40}
     },
     "cinq" :{
         "nom" : "emplacement 5",
         "coordXY" : {'x' : 50, 'y' : 0}
+    },
+    "six" : {
+        "nom" : "emplacement 6",
+        "coordXY" : {'x' : 80, 'y' : -10}
     }
 }
